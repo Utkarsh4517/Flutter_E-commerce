@@ -1,4 +1,4 @@
-#Sun Feb 19 10:48:14 IST 2023
+#Sun Feb 19 22:32:27 IST 2023
 base.0=/home/notprime/vscode_practice/flutter_prj/ecommerce_clone/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

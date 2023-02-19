@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:ecommerce_clone/common/widgets/custom_textfield.dart';
 import 'package:ecommerce_clone/constants/global_var.dart';
 import 'package:flutter/material.dart';
  // enum is used to get the index of whether user is trying to sign in or sign up inside Listtile radio
@@ -15,6 +18,21 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  Auth _auth = Auth.signup;
+  final _signUpFormKey = GlobalKey<FormState>();
+  final _signIpFormKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
+  @override
+  void dispose(){
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
    // Navigator.pushNamed(context, '');
@@ -41,9 +59,41 @@ class _AuthScreenState extends State<AuthScreen> {
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
                   value: Auth.signup , // when ever we click up this radio button we want enum to set the value to signup
-                  
+                  groupValue: _auth,
+                  onChanged: (Auth? val){
+                    setState(() {
+                      _auth = val!;
+                    });
+                  }
                 ),
-              )
+              ),
+              if(_auth == Auth.signup)
+                Form(
+                  key: _signUpFormKey,
+                  child: Column(
+                    children: [
+
+                      CustomTextField(controller: _emailController, hintText:'Email' ,)
+                    ],
+                  ),
+                  ),
+                ListTile(
+                title: const Text(
+                  'Sign-In.', style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signin , // when ever we click up this radio button we want enum to set the value to signup
+                  groupValue: _auth,
+                  onChanged: (Auth? val){
+                    setState(() {
+                      _auth = val!;
+                    });
+                  }
+                ),
+              ),
             ],
           ),
         ),
