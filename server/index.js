@@ -14,16 +14,17 @@ const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
 
 // INIT
-const PORT = 3000;
+const PORT = 8080;
 // initialising express and saving it in the app variable.
 const app = express();
+const DB = "mongodb+srv://Utkarsh4517:clocked4517@cluster0.bry89kx.mongodb.net/?retryWrites=true&w=majority";
 
 //middleware
 app.use(authRouter);
 
 // connections
 mongoose
-  .connect()
+  .connect(DB)
   .then(() => {
     console.log("connection successful");
   })
